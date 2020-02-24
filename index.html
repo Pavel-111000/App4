@@ -1,0 +1,174 @@
+<!DOCTYPE html> 
+<html> 
+<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.  Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
+ 
+THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
+ 
+ 
+Authors in chronological order of contribution:
+Tim Riedel
+Pavel Olariu
+ 
+Further Information:
+http://cns.utexas.edu/fri
+ 
+Research Educator:
+Timothy Riedel
+triedel@utexas.edu
+ 
+Brief Description of Goal of Code:
+To provide a quick and somewhat representative diagnostic of cold vs. flu, and get the coder (me) familiar with coding in javascript and html5.
+ 
+Known Issues:
+The issues I ran into were having the results page display after clicking on a corresponding results button, and having the results function correctly provide a percentage (not 25 and 25 or 0 and 0). 
+
+https://www.w3schools.com/w3css/default.asp
+https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
+-->
+	
+   <head> 
+      <title>Hello World</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="w3.css">
+      <link rel="stylesheet" href="w3-colors-flat.css">
+   </head> 
+
+
+<script>
+	//Variables to hold user answers and percentages
+        var allergy_count = 0;
+        var cold_count = 0;
+	var allergy_percent = 0;
+	var cold_percent = 0;
+
+	//Adds 1 to allergy_count when user indicates answer
+        function allergyAdd(){
+            allergy_count = allergy_count + 1; //this function will add when participant click on yes or no
+        }
+
+	//Adds 1 to cold_count when user indicates answer
+        function coldAdd(){
+            cold_count = cold_count + 1; //this function will add when participant clicks yes or no
+        }
+	
+	//Calculates percent of Allergy Answers & Cold Answers and stores them
+	function getPercent() {
+		allergy_percent = (allergy_count / 4) * 100; //calculated the total divided by four for allergy percentage
+		cold_percent = (cold_count / 4) * 100;	//calculated the total divided by four for cold percentage
+	}
+	//Gets the Percents when results is pushed and prints the results to the user
+	function printResults() { 
+		getPercent(); //calls the get percent function
+		document.getElementById("allergy%").innerHTML = allergy_percent; //changes allergy% to allergy_percent in html
+		document.getElementById("cold%").innerHTML = cold_percent; //changes cold% to cold_percent in html
+
+	}
+
+  </script>
+
+
+
+<style>	
+.body {
+     margin: 0em;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    overflow-y: auto;
+    z-index: 0;
+    background-color: hsl(0,0%,100%);
+}
+
+  .page:target {
+    left: 0vw;
+    z-index: 1;
+}
+</style>
+
+<body>
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Cold or Allergies?</h1>
+</div>
+	
+<div id="content" class="w3-container">
+	<p>Are you feeling like you might have a cold but wonder if it is allergies. Answer a few short questions to find out!</p>
+	
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
+	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Are your eyes watery or itchy?</p>   <!--Input the question wanted-->
+	<a href="#two" onclick="allergyAdd()" class="w3-btn w3-black"> Yes </a> <!--This is the first button with the control to add the variable-->
+	<a href="#two" onclick="coldAdd()" class="w3-btn w3-black"> No </a>	<!--No button with cold variable added-->
+    	</div>
+</div>
+
+<div class="page" id="two"> <!--Copied a new page to appear-->
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you have a fever?</p> <!--page content changed to question-->
+		<a href="#three" onclick="coldAdd()" class="w3-btn w3-black"> Yes </a> <!--button for yes added to cold variable-->
+		<a href="#three" onclick="allergyAdd()" class="w3-btn w3-black"> No </a> <!--no button added to allergy variable-->
+	</div>
+</div>	
+	
+<div class="page" id="three"> <!--third page with id changed-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Do you have a sore throat?</p> <!--changed page content to question-->
+		<a href="#four" onclick="coldAdd()" class="w3-btn w3-black"> Yes </a> <!--button for yes added to cold variable-->
+		<a href="#four" onclick="allergyAdd()" class="w3-btn w3-black"> No </a>	<!--no button added to allergy variable-->
+    	</div>
+</div>
+	
+<div class="page" id="four"> <!--fourth page with id four-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1> 
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Are your symptoms seasonal or chronic?</p>  <!--changed page content to question-->
+		<a href="#five" onclick="allergyAdd()"class="w3-btn w3-black"> Yes </a> <!--This is the first button with the control to add the variable-->
+		<a href="#five" onclick="coldAdd()" class="w3-btn w3-black"> No </a>	<!--No button with cold variable added-->
+    	</div>
+</div>
+	
+<div class="page" id="five"> <!--fifth page for results-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Results</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+		<a onclick="printResults()" class="w3-btn w3-black"> Results </a> <!--button updates results when clicked-->
+		<p> The percent your answers correspond to allergies is: <span id="allergy%"></span>%. </p> <!--prints allergy results-->
+		<p> The percent your answers correspond to a cold is: <span id="cold%"></span>%. </p> <!--prints cold results-->
+		
+    	</div>
+</div>
+
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>DIY!</p>
+</footer>
+
+</body>
+</html>
